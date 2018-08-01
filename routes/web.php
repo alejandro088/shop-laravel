@@ -11,10 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PageController@welcome');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::middleware(['auth','admin'])->prefix('admin')->group(function(){
+Route::get('/products','ProductController@index'); //listado
+Route::get('/products/create','ProductController@create'); //show form
+Route::post('/products','ProductController@store'); //save data
+Route::get('/products/{id}/edit','ProductController@edit'); //show form
+Route::post('/products/{id}/edit','ProductController@update'); //save data
+Route::post('/products/{id}/delete','ProductController@destroy'); //delete
+
+Route::get('/products/{id}/images','ImageController@index'); //listado
+Route::post('/products/{id}/images','ImageController@store'); //save data
+Route::post('/products/{id}/images/delete','ImageController@destroy'); //delete
+});
