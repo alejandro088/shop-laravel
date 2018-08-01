@@ -25,7 +25,7 @@
                     color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
                 -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#dashboard-1" role="tab" data-toggle="tab">
+                    <a class="nav-link active" href="#dashboard-1" role="tab" data-toggle="tab">
                         <i class="material-icons">dashboard</i>
                         Carrito de compras
                     </a>
@@ -40,9 +40,55 @@
             </ul>
             <div class="tab-content tab-space">
                 <div class="tab-pane active" id="dashboard-1">
-                    Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits.
-                    <br><br>
-                    Dramatically visualize customer directed convergence without revolutionary ROI.
+                    
+                     <p>Tu carrito de compras presenta {{auth()->user()->cart->details->count()}} productos </p>   
+
+                    <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th>Nombre</th>
+                                    
+                                    
+                                    <th class="text-right">Precio</th>
+                                    <th>Cantidad</th>
+                                    <th>SubTotal</th>
+                                    <th class="text-right">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    @foreach(auth()->user()->cart->details as $detail)
+                                <tr>
+                                    <td class="text-center">
+                                        <img src="{{$detail->product->featured_image_url}}" height="50" />
+                                    </td>
+                                    <td>
+                                        <a href="{{url("/products/{$detail->product->id}")}}" target="_blank">{{$detail->product->name}}</a>
+                                    </td>                                    
+                                    
+                                    <td class="text-right">&euro; {{$detail->product->price}}</td>
+                                    <td class="text-right">{{$detail->quantity}}</td>
+                                    <td class="text-right">&euro; {{$detail->quantity * $detail->product->price}}</td>
+                                    <td class="td-actions text-right">
+                                        
+                                        <form action="{{url("/cart")}}" method="POST">
+                                        @csrf
+                                        {{method_field('DELETE')}}
+                                        <input type="hidden" name="cart_detail_id" value="{{$detail->id}}">
+                                        
+                                        <a href="{{url("/products/{$detail->product->id}")}}" target="_blank" rel="tooltip" title="Ver producto" class="btn btn-info btn-simple btn-xs">
+                                                <i class="fa fa-info"></i>
+                                        </a>
+                                        
+                                        <button type="submit" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                    </table>
                 </div>
                 
                 <div class="tab-pane" id="tasks-1">
