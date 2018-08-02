@@ -14,9 +14,9 @@
       <div class="section text-center">
         <h2 class="title">Dashboard</h2>
         
-        @if (session('status'))
+        @if (session('notification'))
             <div class="alert alert-success" role="alert">
-                {{ session('status') }}
+                {{ session('notification') }}
             </div>
         @endif
                 
@@ -89,6 +89,15 @@
                                 @endforeach
                             </tbody>
                     </table>
+
+                    <div class="text-center">
+                        <form action="{{ url('/order') }}" method="POST">
+                            @csrf
+                            <button class="btn btn-primary btn-round">
+                                <i class="material-icons">done</i> Realizar pedido.
+                            </button>
+                        </form>
+                    </div>
                 </div>
                 
                 <div class="tab-pane" id="tasks-1">

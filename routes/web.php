@@ -21,6 +21,8 @@ Route::get('/products/{id}','ProductController@show'); //show product
 Route::post('/cart','CartDetailController@store'); //save data
 Route::delete('/cart','CartDetailController@destroy'); //delete
 
+Route::post('/order','CartController@update'); //update data
+
 Route::middleware(['auth','admin'])->prefix('admin')->namespace('Admin')->group(function(){
 Route::get('/products','ProductController@index'); //listado
 Route::get('/products/create','ProductController@create'); //show form
