@@ -52,11 +52,12 @@
                             <a class="dropdown-item" href="{{ url('/home') }}">Dashboard</a>
                             @if(auth()->user()->admin)  
                             <a class="dropdown-item" href="{{ url('/admin/products') }}">Gestionar productos</a>
+                            <a class="dropdown-item" href="{{ url('/admin/categories') }}">Gestionar cateogias</a>
                             @endif
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
+                                {{ __('Cerrar sesión') }}
                             </a>
                 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

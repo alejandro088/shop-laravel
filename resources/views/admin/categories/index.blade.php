@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Listado de productos')
+@section('title', 'Listado de categorias')
 
 @section('body-class', 'profile-page sidebar-collapse')
 
@@ -12,43 +12,37 @@
     <div class="container">
 
       <div class="section text-center">
-        <h2 class="title">Listado de productos</h2>
+        <h2 class="title">Listado de categorias</h2>
         <div class="team">
           <div class="row">
 
-            <a href="{{url('/admin/products/create')}}" class="btn btn-primary btn-round">Nuevo producto</a>
+            <a href="{{url('/admin/categories/create')}}" class="btn btn-primary btn-round">Nueva categoria</a>
             <table class="table">
                     <thead>
                         <tr>
-                            <th class="text-center">#</th>
+                            
                             <th>Nombre</th>
                             <th>Descripcion</th>
-                            <th>Categoría</th>
-                            <th class="text-right">Precio</th>
                             <th class="text-right">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($products as $product)
+                        @foreach($categories as $category)
                         <tr>
-                            <td class="text-center">{{$product->id}}</td>
-                            <td>{{$product->name}}</td>
-                            <td>{{$product->short_desc}}</td>
-                            <td>{{$product->category_name}}</td>
-                            <td class="text-right">&euro; {{$product->price}}</td>
+                            
+                            <td>{{$category->name}}</td>
+                            <td>{{$category->short_desc}}</td>                            
                             <td class="td-actions text-right">
                                 
-                                <form action="{{url("/admin/products/{$product->id}/delete")}}" method="POST">
+                                <form action="{{url("/admin/categories/{$category->id}")}}" method="POST">
                                 @csrf
-                                <a href="{{url("/products/{$product->id}")}}" rel="tooltip" title="Ver producto" class="btn btn-info btn-simple btn-xs">
+                                {{method_field('DELETE')}}
+                                <a rel="tooltip" title="Ver categoria" class="btn btn-info btn-simple btn-xs">
                                         <i class="fa fa-info"></i>
                                 </a>
-                                <a href="{{url("/admin/products/{$product->id}/edit")}}" rel="tooltip" title="Editar producto" class="btn btn-success btn-simple btn-xs">
+                                <a href="{{url("/admin/categories/{$category->id}/edit")}}" rel="tooltip" title="Editar categoria" class="btn btn-success btn-simple btn-xs">
                                     <i class="fa fa-edit"></i>
-                                </a>
-                                <a href="{{url("/admin/products/{$product->id}/images")}}" rel="tooltip" title="Imagenes producto" class="btn btn-warning btn-simple btn-xs">
-                                    <i class="fa fa-image"></i>
-                                </a>
+                                </a>        
                                 <button type="submit" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs">
                                     <i class="fa fa-times"></i>
                                 </button>
@@ -59,7 +53,7 @@
                     </tbody>
             </table>
 
-                {{$products->links() }}
+                {{$categories->links() }}
             
           </div>
         </div>
