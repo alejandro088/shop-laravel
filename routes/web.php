@@ -16,8 +16,13 @@ Route::get('/', 'PageController@welcome');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/search','SearchController@show'); //show search
+Route::get('/products/json','SearchController@data'); //show data json
+
 Route::get('/products/{id}','ProductController@show'); //show product
 Route::get('/categories/{category}','CategoryController@show'); //show category
+
+
 
 Route::post('/cart','CartDetailController@store'); //save data
 Route::delete('/cart','CartDetailController@destroy'); //delete

@@ -29,7 +29,7 @@ class Product extends Model
         }
 
         //default
-        return 'img/products/no-photo.jpg';
+        return '/img/products/no-photo.jpg';
     }
 
     public function getShortDescAttribute()
